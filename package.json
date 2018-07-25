@@ -1,0 +1,23 @@
+{
+  "name": "ice-cream-shop-yelp",
+  "version": "1.0.0",
+  "description": "yelp application which is gathering comments about ice cream shops",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jagodagniadekprobulska/ice-cream-shop-yelp.git"
+  },
+  "author": "Jagoda Gniadek-Probulska, Justyna Fornalik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jagodagniadekprobulska/ice-cream-shop-yelp/issues"
+  },
+  "homepage": "https://github.com/jagodagniadekprobulska/ice-cream-shop-yelp#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
