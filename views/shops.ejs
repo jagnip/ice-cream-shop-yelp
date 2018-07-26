@@ -11,16 +11,18 @@
             </div>
         </header>
         
-        
-        
-        
-        <% shops.forEach( (shop) => { %>
-            <div>
-                <h4><%= shop.name%></h4>
-                <img src="<%= shop.image %>"
+        <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% shops.forEach(function(campground){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <img src="<%= shop.image %>">
+                   <div class="caption">
+                       <h4><%= shop.name %></h4>
+                   </div>
+                </div>
             </div>
-           
         <% }); %>
     </div>
+</div>
     
 <% include partials/footer %>
