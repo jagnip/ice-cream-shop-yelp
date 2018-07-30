@@ -54,7 +54,7 @@ app.post("/shops", (req, res) => {
 
 //SHOW 
 app.get("/shops/:id", (req, res) => {
-    res.send("THIS WILL BE THE SHOW PAGE ONE DAY")
+    res.render("show");
 })
 
 app.listen(process.env.PORT, process.env.IP, () => {
