@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
     res.render("landing");
 });
 
+//INDEX
 app.get("/shops", (req, res) => {
     
     Shop.find({}, (err, shops) => {
@@ -31,6 +32,7 @@ app.get("/shops", (req, res) => {
     });
 });
 
+//NEW
 app.get("/shops/new", (req, res) => {
     res.render("new");
 });
@@ -50,6 +52,7 @@ app.post("/shops", (req, res) => {
     });
 });
 
+//SHOW 
 app.get("/shops/:id", (req, res) => {
     res.send("THIS WILL BE THE SHOW PAGE ONE DAY")
 })
