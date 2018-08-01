@@ -1,0 +1,11 @@
+<% include ../partials/header %>
+    
+    <h1><%= shop.name %></h1>
+    <img src="<%= shop.image %>">
+    <p><%= shop.description %></p>
+
+<% shop.comments.forEach( (comment) => { %>
+    <p><strong><%= comment.author %></strong> - <%= comment.text %></p>
+<% }); %>
+
+<% include ../partials/footer %>

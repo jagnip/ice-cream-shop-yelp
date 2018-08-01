@@ -23,14 +23,14 @@ app.get("/shops", (req, res) => {
         if(err) {
             console.log(err);
         } else {
-            res.render("shops", {shops: shops});
+            res.render("shops/index", {shops: shops});
         }
     });
 });
 
 //NEW
 app.get("/shops/new", (req, res) => {
-    res.render("new");
+    res.render("shops/new");
 });
 
 app.post("/shops", (req, res) => {
@@ -55,10 +55,15 @@ app.get("/shops/:id", (req, res) => {
         if(err) {
             console.log(err);
         } else {
-            console.log(foundShop)
-            res.render("show", {shop: foundShop});
+            res.render("shops/show", {shop: foundShop});
         }
     })
+})
+
+//COMMENTS ROUTES
+
+app.get("/shops/:id/comments/new", (req, res) => {
+    res.render("comments/new");
 })
 
 app.listen(process.env.PORT, process.env.IP, () => {
