@@ -2,19 +2,15 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var Shop = require("./models/shop");
+var seedDB = require("./seeds");
 
+seedDB();
+
+//APP CONFIG
 mongoose.connect('mongodb://localhost:27017/ice_yelp', { useNewUrlParser: true }); 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-//SCHEMA SETUP
-var shopSchema = new mongoose.Schema( {
-    name: String,
-    image: String,
-    description: String,
-});
-
-var Shop = mongoose.model("Shop", shopSchema);
 
 app.get("/", (req, res) => {
     res.render("landing");
@@ -54,7 +50,15 @@ app.post("/shops", (req, res) => {
 
 //SHOW 
 app.get("/shops/:id", (req, res) => {
-    res.render("show");
+ 
+    Shop.findById(req.params.id).populate("comments").exec(function(err, foundShop) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log(foundShop)
+            res.render("show", {shop: foundShop});
+        }
+    })
 })
 
 app.listen(process.env.PORT, process.env.IP, () => {
