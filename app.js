@@ -57,14 +57,20 @@ app.get("/shops/:id", (req, res) => {
         } else {
             res.render("shops/show", {shop: foundShop});
         }
-    })
-})
+    });
+});
 
 //COMMENTS ROUTES
 
 app.get("/shops/:id/comments/new", (req, res) => {
-    res.render("comments/new");
-})
+    Shop.findById(req.params.id, (err, foundShop) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("comments/new", {shop: foundShop});
+        }
+    });
+});
 
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
