@@ -3,9 +3,10 @@ var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Shop = require("./models/shop");
+var Comment = require("./models/comment");
 var seedDB = require("./seeds");
 
-seedDB();
+// seedDB();
 
 //APP CONFIG
 mongoose.connect('mongodb://localhost:27017/ice_yelp', { useNewUrlParser: true }); 
@@ -72,6 +73,29 @@ app.get("/shops/:id/comments/new", (req, res) => {
     });
 });
 
+app.post("/shops/:id/comments/", (req, res) => {
+    
+    //lookup shop using ID
+    Shop.findById(req.params.id, (err, foundShop) => {
+        if (err) {
+            console.log(err);
+            res.redirect("/shops");
+        } else {
+            Comment.create(req.body.comment, (err, createdComment) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    foundShop.comments.push(createdComment);
+                    foundShop.save();
+                    res.redirect(`/shops/${foundShop._id}`);
+                }
+            });
+        }
+    });
+    //create new comment
+    //connect new comment to shop
+    //redirect shop show page
+})
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
 });
