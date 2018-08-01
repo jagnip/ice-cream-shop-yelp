@@ -3,6 +3,10 @@
     <h1><%= shop.name %></h1>
     <img src="<%= shop.image %>">
     <p><%= shop.description %></p>
+    
+    <p>
+        <a class="btn btn-success" href="/shops/<%= shop._id %>/comments/new">Add new comment</a>
+    </p>
 
 <% shop.comments.forEach( (comment) => { %>
     <p><strong><%= comment.author %></strong> - <%= comment.text %></p>
