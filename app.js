@@ -118,7 +118,23 @@ app.post("/shops/:id/comments/", (req, res) => {
 
 app.get("/register", (req, res) => {
     res.render("register");
-})
+});
+
+app.post("/register", (req, res) => {
+    var newUser = new User({username: req.body.username});
+    var password = req.body.password;
+    User.register(newUser, password, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.render("register");
+        }
+        
+        passport.authenticate("local")(req, res, () => {
+        res.redirect("/shops");
+        });
+    });
+});
+
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
 });
