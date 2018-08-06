@@ -145,6 +145,10 @@ app.get("/login", (req, res) => {
     res.render("login");
 });
 
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/shops");
+})
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
 });
