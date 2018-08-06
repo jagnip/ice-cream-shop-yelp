@@ -17,6 +17,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname +"/public"));
 
+//PASSPORT CONFIGURATION
+app.use(require("express-session")({
+    secret: "Phrase to secret setup...",
+    resave: false,
+    saveUnitialized: false
+}));
+
 app.get("/", (req, res) => {
     res.render("landing");
 });
