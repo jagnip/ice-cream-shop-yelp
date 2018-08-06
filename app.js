@@ -80,7 +80,7 @@ app.get("/shops/:id", (req, res) => {
 
 //COMMENTS ROUTES
 
-app.get("/shops/:id/comments/new", (req, res) => {
+app.get("/shops/:id/comments/new", isLoggedIn, (req, res) => {
     Shop.findById(req.params.id, (err, foundShop) => {
         if (err) {
             console.log(err);
@@ -90,7 +90,7 @@ app.get("/shops/:id/comments/new", (req, res) => {
     });
 });
 
-app.post("/shops/:id/comments/", (req, res) => {
+app.post("/shops/:id/comments/", isLoggedIn, (req, res) => {
     
     //lookup shop using ID
     Shop.findById(req.params.id, (err, foundShop) => {
@@ -148,7 +148,15 @@ app.get("/login", (req, res) => {
 app.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/shops");
-})
+});
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
+
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
 });
