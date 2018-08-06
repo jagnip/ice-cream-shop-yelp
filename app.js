@@ -21,8 +21,14 @@ app.use(express.static(__dirname +"/public"));
 app.use(require("express-session")({
     secret: "Phrase to secret setup...",
     resave: false,
-    saveUnitialized: false
+    saveUninitialized: false
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.get("/", (req, res) => {
     res.render("landing");
@@ -106,6 +112,12 @@ app.post("/shops/:id/comments/", (req, res) => {
     //create new comment
     //connect new comment to shop
     //redirect shop show page
+});
+
+//AUTH ROUTES
+
+app.get("/register", (req, res) => {
+    res.render("register");
 })
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
