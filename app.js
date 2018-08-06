@@ -135,6 +135,16 @@ app.post("/register", (req, res) => {
     });
 });
 
+app.post("/login", passport.authenticate("local", 
+    {
+        successRedirect: "/shops",
+        failureRedirect: "/login"
+    }), (req, res) => {});
+
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");
 });
