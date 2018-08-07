@@ -20,11 +20,14 @@ router.post("/", isLoggedIn, (req, res) => {
             console.log(err);
             res.redirect("/shops");
         } else {
-            Comment.create(req.body.comment, (err, createdComment) => {
+            Comment.create(req.body.comment, (err, comment) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    foundShop.comments.push(createdComment);
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    comment.save();
+                    foundShop.comments.push(comment);
                     foundShop.save();
                     res.redirect(`/shops/${foundShop._id}`);
                 }
