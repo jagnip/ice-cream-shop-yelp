@@ -18,7 +18,7 @@ router.get("/new", (req, res) => {
     res.render("shops/new");
 });
 
-router.post("/shops", (req, res) => {
+router.post("/", (req, res) => {
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.shopdescription;
