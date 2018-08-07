@@ -25,6 +25,7 @@ app.use(require("express-session")({
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -36,9 +37,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(indexRoutes);
+app.use("/", indexRoutes);
 app.use("/shops", shopsRoutes);
-app.use(commentRoutes);
+app.use("/shops/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Server is listening!");

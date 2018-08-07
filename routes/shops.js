@@ -3,7 +3,7 @@ var router = express.Router();
 
 var Shop = require("../models/shop");
 
-router.get("/shops", (req, res) => {
+router.get("/", (req, res) => {
     
     Shop.find({}, (err, shops) => {
         if(err) {
@@ -15,7 +15,7 @@ router.get("/shops", (req, res) => {
 });
 
 //NEW
-router.get("/shops/new", (req, res) => {
+router.get("/new", (req, res) => {
     res.render("shops/new");
 });
 
@@ -35,7 +35,7 @@ router.post("/shops", (req, res) => {
 });
 
 //SHOW 
-router.get("/shops/:id", (req, res) => {
+router.get("/:id", (req, res) => {
  
     Shop.findById(req.params.id).populate("comments").exec(function(err, foundShop) {
         if(err) {

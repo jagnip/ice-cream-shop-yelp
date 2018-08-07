@@ -1,9 +1,9 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var Comment = require("../models/comment");
 var Shop = require("../models/shop");
 
-router.get("/shops/:id/comments/new", isLoggedIn, (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     Shop.findById(req.params.id, (err, foundShop) => {
         if (err) {
             console.log(err);
@@ -13,7 +13,7 @@ router.get("/shops/:id/comments/new", isLoggedIn, (req, res) => {
     });
 });
 
-router.post("/shops/:id/comments/", isLoggedIn, (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
     
     //lookup shop using ID
     Shop.findById(req.params.id, (err, foundShop) => {
