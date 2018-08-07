@@ -15,7 +15,6 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 router.post("/", isLoggedIn, (req, res) => {
     
-    //lookup shop using ID
     Shop.findById(req.params.id, (err, foundShop) => {
         if (err) {
             console.log(err);
@@ -32,9 +31,6 @@ router.post("/", isLoggedIn, (req, res) => {
             });
         }
     });
-    //create new comment
-    //connect new comment to shop
-    //redirect shop show page
 });
 
 function isLoggedIn(req, res, next) {

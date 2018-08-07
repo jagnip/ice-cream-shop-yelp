@@ -14,7 +14,6 @@ router.get("/", (req, res) => {
     });
 });
 
-//NEW
 router.get("/new", (req, res) => {
     res.render("shops/new");
 });
@@ -34,7 +33,6 @@ router.post("/shops", (req, res) => {
     });
 });
 
-//SHOW 
 router.get("/:id", (req, res) => {
  
     Shop.findById(req.params.id).populate("comments").exec(function(err, foundShop) {

@@ -8,8 +8,6 @@ router.get("/", (req, res) => {
     res.render("landing");
 });
 
-//AUTH ROUTES
-
 router.get("/register", (req, res) => {
     res.render("register");
 });
