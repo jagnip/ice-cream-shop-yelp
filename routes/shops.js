@@ -14,11 +14,11 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("shops/new");
 });
 
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.shopdescription;
@@ -43,5 +43,12 @@ router.get("/:id", (req, res) => {
         }
     });
 });
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
