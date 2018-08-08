@@ -95,5 +95,22 @@ function isLoggedIn(req, res, next) {
     res.redirect("/login");
 }
 
+function checkShopOwnership(req, res, next) {
+     if(req.isAuthenticated()) {
+        Shop.findById(req.params.id, function(err, foundShop) {
+        if(err) {
+            res.redirect("back");
+        } else {
+            if(foundShop.author.id.equals(req.user._id)) {
+                next();
+            } else {
+                res.redirect("back");
+            }
+        }
+        });
+    } else {
+        res.redirect("back");
+    }
+}
 
 module.exports = router;
