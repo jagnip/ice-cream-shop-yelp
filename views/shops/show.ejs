@@ -20,9 +20,9 @@
                      <p>
                          <em>Submitted by: <strong><%= shop.author.username %></strong></em>
                      </p>
-                     <a class="btn btn-warning" href="/shops/<%= shop._id %>/edit">Edit!</a>
+                     <a class="btn btn-xs btn-warning" href="/shops/<%= shop._id %>/edit">Edit!</a>
                      <form id="delete-form" action="/shops/<%= shop._id %>?_method=DELETE" method="POST">
-                         <button class="btn btn-danger">Delete</button>
+                         <button class="btn btn-xs btn-danger">Delete</button>
                      </form>
                  </div>
             </div>
