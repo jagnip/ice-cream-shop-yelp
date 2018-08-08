@@ -59,6 +59,17 @@ router.get("/:id/edit", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+
+    Shop.findByIdAndUpdate(req.params.id, req.body.shop, (err, foundShop) => {
+        if(err) {
+            res.redirect("/shops");
+        } else {
+            res.redirect(`/shops/${req.params.id}`);
+        }
+    });
+});
+
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
