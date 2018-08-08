@@ -20,6 +20,7 @@
                      <p>
                          <em>Submitted by: <strong><%= shop.author.username %></strong></em>
                      </p>
+                     <a class="btn btn-warning" href="/shops/<%= shop._id %>/edit">Edit!</a>
                  </div>
             </div>
             <div class="well">
@@ -34,10 +35,8 @@
                                 <span class="pull-right">10 days ago</span>
                                 <p><%= comment.text %></p>
                             </div>
-                          
                         </div>
                     <% }); %>
-                
             </div>
         </div>
     </div>
