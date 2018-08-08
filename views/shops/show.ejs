@@ -16,7 +16,10 @@
                  <div class="caption">
                      <h4 class="pull-right">$9.00/scoop</h4>
                      <h3><a><h1><%= shop.name %></h1></a></h3>
-                     <p><p><%= shop.description %></p></p>
+                     <p><%= shop.description %></p>
+                     <p>
+                         <em>Submitted by: <strong><%= shop.author.username %></strong></em>
+                     </p>
                  </div>
             </div>
             <div class="well">
