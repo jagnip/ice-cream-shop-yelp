@@ -50,17 +50,24 @@ router.get("/:id", (req, res) => {
 //EDIT SHOP ROUTE
 router.get("/:id/edit", (req, res) => {
     
-    Shop.findById(req.params.id, function(err, foundShop) {
+    if(req.isAuthenticated()) {
+        Shop.findById(req.params.id, function(err, foundShop) {
         if(err) {
             res.redirect("shops");
         } else {
-            res.render("shops/edit", {shop: foundShop});
+            if(foundShop.author.id.equals(req.user._id)) {
+                res.render("shops/edit", {shop: foundShop});
+            } else {
+                res.send("BASBHBSHDBSHBDNOOOO")
+            }
         }
-    });
+        });
+    } else {
+        res.redirect("/shops");
+    }
 });
 
 router.put("/:id", (req, res) => {
-
     Shop.findByIdAndUpdate(req.params.id, req.body.shop, (err, foundShop) => {
         if(err) {
             res.redirect("/shops");
@@ -87,5 +94,6 @@ function isLoggedIn(req, res, next) {
     }
     res.redirect("/login");
 }
+
 
 module.exports = router;
