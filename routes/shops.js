@@ -70,6 +70,17 @@ router.put("/:id", (req, res) => {
     });
 });
 
+//DESTROY ROUTE
+router.delete("/:id", (req, res) => {
+    Shop.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
+            res.redirect("/shops");
+        } else {
+            res.redirect("/shops");
+        }
+    })
+});
+
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
