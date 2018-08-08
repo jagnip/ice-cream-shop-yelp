@@ -68,7 +68,6 @@ router.put("/:id", checkShopOwnership, (req, res) => {
 router.delete("/:id", checkShopOwnership, (req, res) => {
     Shop.findByIdAndRemove(req.params.id, (err) => {
         res.redirect("/shops");
-        
     })
 });
 
