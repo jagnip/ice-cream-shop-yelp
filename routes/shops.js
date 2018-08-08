@@ -48,23 +48,10 @@ router.get("/:id", (req, res) => {
 });
 
 //EDIT SHOP ROUTE
-router.get("/:id/edit", (req, res) => {
-    
-    if(req.isAuthenticated()) {
-        Shop.findById(req.params.id, function(err, foundShop) {
-        if(err) {
-            res.redirect("shops");
-        } else {
-            if(foundShop.author.id.equals(req.user._id)) {
-                res.render("shops/edit", {shop: foundShop});
-            } else {
-                res.send("BASBHBSHDBSHBDNOOOO")
-            }
-        }
-        });
-    } else {
-        res.redirect("/shops");
-    }
+router.get("/:id/edit", checkShopOwnership, (req, res) => {
+    Shop.findById(req.params.id, (err, foundShop) => {
+        res.render("shops/edit", {shop: foundShop});
+    })
 });
 
 router.put("/:id", (req, res) => {
