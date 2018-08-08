@@ -54,7 +54,7 @@ router.get("/:id/edit", checkShopOwnership, (req, res) => {
     })
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", checkShopOwnership, (req, res) => {
     Shop.findByIdAndUpdate(req.params.id, req.body.shop, (err, foundShop) => {
         if(err) {
             res.redirect("/shops");
@@ -65,13 +65,10 @@ router.put("/:id", (req, res) => {
 });
 
 //DESTROY ROUTE
-router.delete("/:id", (req, res) => {
+router.delete("/:id", checkShopOwnership, (req, res) => {
     Shop.findByIdAndRemove(req.params.id, (err) => {
-        if (err) {
-            res.redirect("/shops");
-        } else {
-            res.redirect("/shops");
-        }
+        res.redirect("/shops");
+        
     })
 });
 
