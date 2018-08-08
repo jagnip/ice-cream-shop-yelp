@@ -6,7 +6,7 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var User = require("./models/user");
 var seedDB = require("./seeds");
-
+var methodOverride = require("method-override");
 var indexRoutes = require("./routes/index");
 var shopsRoutes = require("./routes/shops");
 var commentRoutes = require("./routes/comments");
@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/ice_yelp', { useNewUrlParser: true }
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname +"/public"));
+app.use(methodOverride("_method"));
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({

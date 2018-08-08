@@ -47,6 +47,18 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//EDIT SHOP ROUTE
+router.get("/:id/edit", (req, res) => {
+    
+    Shop.findById(req.params.id, function(err, foundShop) {
+        if(err) {
+            res.redirect("shops");
+        } else {
+            res.render("shops/edit", {shop: foundShop});
+        }
+    });
+});
+
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
