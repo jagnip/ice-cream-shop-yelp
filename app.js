@@ -14,6 +14,7 @@ var commentRoutes = require("./routes/comments");
 
 // seedDB();
 
+
 //APP CONFIG
 mongoose.connect('mongodb://localhost:27017/ice_yelp', { useNewUrlParser: true }); 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -37,6 +38,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

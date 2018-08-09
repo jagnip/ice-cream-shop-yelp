@@ -43,6 +43,7 @@ var middleware = {
         if(req.isAuthenticated()) {
             return next();
         }
+        req.flash("error", "Log in first.");
         res.redirect("/login");
     }
 };
