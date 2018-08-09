@@ -36,23 +36,15 @@ router.post("/", isLoggedIn, (req, res) => {
     });
 });
 
-router.get("/:comment_id/edit", (req, res) => {
+router.get("/:comment_id/edit", checkCommentOwnership, (req, res) => {
     Comment.findById(req.params.comment_id, (err, foundComment) => {
-        if (err) {
-            res.redirect("back");
-        } else {
-            res.render("comments/edit", {shop_id: req.params.id, comment: foundComment});
-        }
+        res.render("comments/edit", {shop_id: req.params.id, comment: foundComment});
     });
 });
 
-router.put("/:comment_id", (req, res) => {
+router.put("/:comment_id", checkCommentOwnership, (req, res) => {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, foundComment) => {
-        if(err) {
-            res.redirect("/shops");
-        } else {
-            res.redirect(`/shops/${req.params.id}`);
-        }
+        res.redirect(`/shops/${req.params.id}`);
     });
 })
 
