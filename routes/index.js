@@ -17,11 +17,12 @@ router.post("/register", (req, res) => {
     var password = req.body.password;
     User.register(newUser, password, (err, user) => {
         if (err) {
-            console.log(err);
-            return res.render("register");
+            req.flash("error", err.message);
+            return res.redirect("/register");
         }
         
         passport.authenticate("local")(req, res, () => {
+        req.flash("success", `Welcome to Ice Yelp ${user.username}!`);
         res.redirect("/shops");
         });
     });
@@ -39,6 +40,7 @@ router.get("/login", (req, res) => {
 
 router.get("/logout", (req, res) => {
     req.logout();
+    req.flash("success", "Bye!");
     res.redirect("/shops");
 });
 
