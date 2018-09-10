@@ -12,9 +12,6 @@ var indexRoutes = require("./routes/index");
 var shopsRoutes = require("./routes/shops");
 var commentRoutes = require("./routes/comments");
 
-// seedDB();
-
-
 //APP CONFIG
 mongoose.connect('mongodb://localhost:27017/ice_yelp', { useNewUrlParser: true }); 
 app.use(bodyParser.urlencoded({extended: true}));
